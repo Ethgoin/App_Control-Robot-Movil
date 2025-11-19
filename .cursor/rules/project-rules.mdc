@@ -1,0 +1,51 @@
+---
+alwaysApply: true
+---
+name: PololuRemoteControlApp
+description: >
+  Proyecto Android en Kotlin que desarrolla una aplicación móvil para controlar remotamente un robot Pololu mediante conexión Bluetooth HC-05.
+goals:
+  - Crear una aplicación Android funcional con interfaz intuitiva para controlar el robot Pololu.
+  - Implementar la conexión Bluetooth clásica (RFCOMM) con el módulo HC-05.
+  - Enviar comandos seriales al robot: 
+    F (Forward), B (Backward), L (Left), R (Right), S (Stop).
+  - Estructurar el código en arquitectura limpia (MVVM).
+  - Manejar permisos Bluetooth en tiempo de ejecución (Android 12+).
+  - Mostrar estado de conexión y errores al usuario.
+  - Implementar botones o joystick virtual para el control manual.
+  - Incluir monitoreo de sensores del robot (telemetría en tiempo real).
+  - Mantener compatibilidad con compileSdk 35 y targetSdk 35.
+rules:
+  - Escribir todo el código en Kotlin.
+  - Utilizar nombres de variables, funciones y clases claros, en inglés.
+  - No incluir dependencias innecesarias.
+  - Documentar cada función con comentarios breves pero informativos.
+  - Asegurar que la app pueda reconectarse si la conexión Bluetooth se pierde.
+  - Mostrar los valores de telemetría actualizados sin bloquear la interfaz.
+  - Todas las pantallas deben desarrollarse en Kotlin usando Jetpack Compose.
+  - No usar XML ni ViewBinding para los layouts.
+  - La interfaz debe ser declarativa y reactiva, basada en estados (remember, mutableStateOf, ViewModel).
+  - Cada pantalla debe ser un @Composable independiente con una estructura clara (por ejemplo, BluetoothConnectionScreen, MainControlScreen, etc.).
+  - La navegación entre pantallas debe hacerse con Navigation Compose.
+  - Cada vez que se termine de generar código código compilarlo utilizando compileDebugKotlin para ver que no existan problemas.
+  - No modificar los build.gradle.kts, Si se tiene que modificar libs.versions o los ficheros gradle, simplemente añadir lo nuevo necesario y no modificar lo existente.
+context:
+  - El robot Pololu está controlado por un Arduino Mega con un módulo Bluetooth HC-05.
+  - El robot responde a comandos seriales simples.
+  - La app mostrará datos enviados por el robot (por ejemplo, distancia, temperatura, luz, velocidad).
+  - La telemetría se recibirá por Bluetooth y se mostrará en tiempo real.
+ui_design:
+  - Pantalla principal con dos secciones:
+      1. **Control manual:** botones grandes y centrados para avanzar, retroceder, girar izquierda, girar derecha y detenerse.
+      2. **Telemetría:** panel lateral con tarjetas o recuadros mostrando:
+         - Distancia (cm)
+         - Temperatura (°C)
+         - Intensidad lumínica (LDR)
+         - Estado del robot (movimiento actual o detenido)
+  - Barra superior mostrando:
+      - Estado Bluetooth (Conectado / Desconectado)
+      - Botón para emparejar o reconectar con el robot.
+  - Tema visual:
+      - Fondo oscuro.
+      - Botones con bordes redondeados, íconos claros y colores vivos (verde, rojo, azul).
+      - Telemetría actualizada dinámicamente sin necesidad de refrescar la pantalla.

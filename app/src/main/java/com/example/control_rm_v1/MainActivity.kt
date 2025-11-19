@@ -3,45 +3,26 @@ package com.example.control_rm_v1
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.viewModels
+import com.example.control_rm_v1.ui.navigation.ControlRMApp
 import com.example.control_rm_v1.ui.theme.Control_RM_V1Theme
+import com.example.control_rm_v1.ui.viewmodel.BluetoothViewModel
 
+/**
+ * Root activity that hosts the Compose navigation graph.
+ */
 class MainActivity : ComponentActivity() {
+
+    private val bluetoothViewModel: BluetoothViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            Control_RM_V1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Control_RM_V1Theme(darkTheme = true) {
+                ControlRMApp(bluetoothViewModel = bluetoothViewModel)
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Control_RM_V1Theme {
-        Greeting("Android")
-    }
-}
